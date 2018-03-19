@@ -37,7 +37,48 @@ if (!is_null($events['events'])) {
       curl_close($ch);
       echo $result . "";
       
+    } else {
+      
+      /*
+      if(isset($event['source']['groupId'])) {
+        $to = $event['source']['groupId'];
+      } else 
+      if(isset($event['source']['roomId'])) {
+        $to = $event['source']['roomId'];
+      } else 
+      if(isset($event['source']['userId'])) {
+        $to = $event['source']['userId'];
+      } else 
+      */
+      {
+        $to = "C4235007b2e60b33fb7019f44f5621159";
+      }
+      
+      
+      $messages = [
+        'type' => 'text',
+        'text' => "KeroBot พบ $content"
+      ];
+      
+      // Make a POST Request to Messaging API to push message
+      $url = 'https://api.line.me/v2/bot/message/push';
+      $data = [
+        'to' => $to,
+        'messages' => [$messages],
+      ];
+      $post = json_encode($data);
+      $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+      $result = curl_exec($ch);
+      curl_close($ch);
+      echo $result . "";
+      
     }
-  }
+  } 
 }
 echo "OK";
