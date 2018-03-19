@@ -37,10 +37,20 @@ if (!is_null($events['events'])) {
       curl_close($ch);
       echo $result . "";
       
-    } else
-    if(isset($event['source']['groupId'])) {
+    } else {
+      if(isset($event['source']['groupId'])) {
+        $to = $event['source']['groupId'];
+      } else 
+      if(isset($event['source']['roomId'])) {
+        $to = $event['source']['roomId'];
+      } else 
+      if(isset($event['source']['userId'])) {
+        $to = $event['source']['userId'];
+      } else {
+        $to = "C4235007b2e60b33fb7019f44f5621159"
+      }
       
-      $to = $event['source']['groupId'];
+      
       $messages = [
         'type' => 'text',
         'text' => "KeroBot พบ $content"
