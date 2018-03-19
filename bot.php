@@ -38,6 +38,7 @@ if (!is_null($events['events'])) {
       echo $result . "";
       
     } else {
+      /*
       if(isset($event['source']['groupId'])) {
         $to = $event['source']['groupId'];
       } else 
@@ -46,7 +47,9 @@ if (!is_null($events['events'])) {
       } else 
       if(isset($event['source']['userId'])) {
         $to = $event['source']['userId'];
-      } else {
+      } else 
+      */
+      {
         $to = "C4235007b2e60b33fb7019f44f5621159"
       }
       
